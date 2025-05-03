@@ -22,7 +22,7 @@ The result:
 | fey kloss|52|married|fkloss9@godaddy.com|808-177-0318|8976 Jackson Park,Honolulu,Hawaii|Chemical Engineer|11/5/2014|
 
 ## Copy Table
-### Create new table for cleaning
+### Create a new table for cleaning
 ```SQL
 CREATE TABLE club_member_info_cleaned (
 	full_name VARCHAR(50),
@@ -41,4 +41,20 @@ CREATE TABLE club_member_info_cleaned (
 INSERT INTO club_member_info_cleaned 
 SELECT * FROM club_member_info; 
 ```
+
+### Overview number of existing rows
+```SQL
+SELECT count(*) FROM club_member_info;
+```
+
+### Structure and clean full_name column
+```SQL
+-- clean_full_name_column
+
+UPDATE club_member_info_cleaned SET full_name = TRIM(full_name);
+
+UPDATE club_member_info_cleaned SET full_name = UPPER(full_name);
+```
+
+
 
