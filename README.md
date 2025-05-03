@@ -42,7 +42,7 @@ INSERT INTO club_member_info_cleaned
 SELECT * FROM club_member_info; 
 ```
 
-### Overview number of existing rows
+### Overview number of existing rows before making UPDATE statement
 ```SQL
 SELECT count(*) FROM club_member_info;
 ```
