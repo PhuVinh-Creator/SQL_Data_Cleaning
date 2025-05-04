@@ -46,6 +46,9 @@ SELECT * FROM club_member_info;
 ```SQL
 SELECT count(*) FROM club_member_info;
 ```
+|count(*)|
+|--------|
+|2010|
 
 ### Structure and clean "full_name" column
 ```SQL
@@ -55,6 +58,13 @@ UPDATE club_member_info_cleaned SET full_name = TRIM(full_name);
 
 UPDATE club_member_info_cleaned SET full_name = UPPER(full_name);
 ```
+|full_name|age|martial_status|email|phone|full_address|job_title|membership_date|
+|---------|---|--------------|-----|-----|------------|---------|---------------|
+|ADDIE LUSH|40|married|alush0@shutterfly.com|254-389-8708|3226 Eastlawn Pass,Temple,Texas|Assistant Professor|7/31/2013|
+|ROCK CRADICK|46|married|rcradick1@newsvine.com|910-566-2007|4 Harbort Avenue,Fayetteville,North Carolina|Programmer III|5/27/2018|
+|SYDEL SHARVELL|46|divorced|ssharvell2@amazon.co.jp|702-187-8715|4 School Place,Las Vegas,Nevada|Budget/Accounting Analyst I|10/6/2017|
+|CONSTANTIN DE LA CRUZ|35||co3@bloglines.com|402-688-7162|6 Monument Crossing,Omaha,Nebraska|Desktop Support Technician|10/20/2015|
+|GAYLOR REDHOLE|38|married|gredhole4@japanpost.jp|917-394-6001|88 Cherokee Pass,New York City,New York|Legal Assistant|5/29/2019|
 
 ### Check and clean "age" column
 
