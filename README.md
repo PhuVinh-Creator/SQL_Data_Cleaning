@@ -44,19 +44,28 @@ SELECT * FROM club_member_info;
 
 ### Overview number of existing rows before making "UPDATE" statement
 ```SQL
-SELECT count(*) FROM club_member_info;
+SELECT 
+	count(*) AS number_of_rows
+FROM 
+	club_member_info;
 ```
-|count(*)|
-|--------|
+|number_of_rows|
+|--------------|
 |2010|
 
 ### Structure and clean "full_name" column
 ```SQL
--- clean_full_name_column
+-- trim_full_name_column
+UPDATE 
+	club_member_info_cleaned 
+SET 
+	full_name = TRIM(full_name);
 
-UPDATE club_member_info_cleaned SET full_name = TRIM(full_name);
-
-UPDATE club_member_info_cleaned SET full_name = UPPER(full_name);
+-- capitalize_full_name_column
+UPDATE 
+	club_member_info_cleaned 
+SET 
+	full_name = UPPER(full_name);
 ```
 |full_name|age|martial_status|email|phone|full_address|job_title|membership_date|
 |---------|---|--------------|-----|-----|------------|---------|---------------|
