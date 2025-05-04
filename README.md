@@ -42,12 +42,12 @@ INSERT INTO club_member_info_cleaned
 SELECT * FROM club_member_info; 
 ```
 
-### Overview number of existing rows before making UPDATE statement
+### Overview number of existing rows before making "UPDATE" statement
 ```SQL
 SELECT count(*) FROM club_member_info;
 ```
 
-### Structure and clean full_name column
+### Structure and clean "full_name" column
 ```SQL
 -- clean_full_name_column
 
@@ -55,6 +55,8 @@ UPDATE club_member_info_cleaned SET full_name = TRIM(full_name);
 
 UPDATE club_member_info_cleaned SET full_name = UPPER(full_name);
 ```
+
+### Check and clean "age" column
 
 
 
