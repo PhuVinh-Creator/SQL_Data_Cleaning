@@ -4,8 +4,12 @@ This is an educational project on data cleaning and preparation using SQL. The o
 
 ## Data Introduction
 ```SQL
-SELECT * FROM club_member_info cmi 
-LIMIT 10;
+SELECT 
+	* 
+FROM 
+	club_member_info cmi 
+LIMIT 
+	10;
 ```
 The result:
 |full_name|age|martial_status|email|phone|full_address|job_title|membership_date|
@@ -38,8 +42,13 @@ CREATE TABLE club_member_info_cleaned (
 
 ### Copy all values from original table
 ```SQL
-INSERT INTO club_member_info_cleaned 
-SELECT * FROM club_member_info; 
+-- import_data_infor
+INSERT INTO 
+	club_member_info_cleaned 
+SELECT 
+	* 
+FROM 
+	club_member_info ; 
 ```
 
 ### Overview number of existing rows before making "UPDATE" statement
@@ -76,6 +85,204 @@ SET
 |GAYLOR REDHOLE|38|married|gredhole4@japanpost.jp|917-394-6001|88 Cherokee Pass,New York City,New York|Legal Assistant|5/29/2019|
 
 ### Check and clean "age" column
+```SQL
+SELECT 
+	age AS odd_age
+FROM 
+	club_member_info_cleaned cmic 
+WHERE 
+	age >=90;
+```
+|odd_age|
+|---|
+|399|
+|555|
+|544|
+|499|
+|522|
+||
+|277|
+||
+|288|
+|588|
+|599|
+|677|
+|322|
+|644|
+||
+|411|
+|633|
+|222|
 
+```SQL
+UPDATE 
+	club_member_info_cleaned 
+SET 
+	age = SUBSTR(age, 1, 2);
+```
 
+```SQL
+SELECT 
+	age,
+	count(*) AS age_volume
+FROM 
+	club_member_info_cleaned cmic 
+GROUP BY
+	age
+ORDER BY 
+	age_volume 
+DESC
+LIMIT 
+	1;
+```
+|age|age_volume|
+|---|----------|
+|40|66|
 
+```SQL
+UPDATE 
+	club_member_info_cleaned 
+SET 
+	age = 40
+WHERE 
+	age = '';
+```
+|full_name|age|martial_status|email|phone|full_address|job_title|membership_date|
+|---------|---|--------------|-----|-----|------------|---------|---------------|
+|ADDIE LUSH|40|married|alush0@shutterfly.com|254-389-8708|3226 Eastlawn Pass,Temple,Texas|Assistant Professor|7/31/2013|
+|ROCK CRADICK|46|married|rcradick1@newsvine.com|910-566-2007|4 Harbort Avenue,Fayetteville,North Carolina|Programmer III|5/27/2018|
+|SYDEL SHARVELL|46|divorced|ssharvell2@amazon.co.jp|702-187-8715|4 School Place,Las Vegas,Nevada|Budget/Accounting Analyst I|10/6/2017|
+|CONSTANTIN DE LA CRUZ|35||co3@bloglines.com|402-688-7162|6 Monument Crossing,Omaha,Nebraska|Desktop Support Technician|10/20/2015|
+|GAYLOR REDHOLE|38|married|gredhole4@japanpost.jp|917-394-6001|88 Cherokee Pass,New York City,New York|Legal Assistant|5/29/2019|
+
+### Check and clean "martial_status" column
+```SQL
+SELECT 
+	DISTINCT martial_status 
+FROM 
+	club_member_info_cleaned cmic;
+```
+|martial_status|
+|--------------|
+|married|
+|divorced|
+||
+|single|
+|divored|
+
+```SQL
+UPDATE 
+	club_member_info_cleaned 
+SET 
+	martial_status = 'single' 
+WHERE 
+	martial_status = '';
+```
+
+```SQL
+UPDATE 
+	club_member_info_cleaned 
+SET 
+	martial_status = 'divorced' 
+WHERE 
+	martial_status = 'divored';
+```
+|full_name|age|martial_status|email|phone|full_address|job_title|membership_date|
+|---------|---|--------------|-----|-----|------------|---------|---------------|
+|ADDIE LUSH|40|married|alush0@shutterfly.com|254-389-8708|3226 Eastlawn Pass,Temple,Texas|Assistant Professor|7/31/2013|
+|ROCK CRADICK|46|married|rcradick1@newsvine.com|910-566-2007|4 Harbort Avenue,Fayetteville,North Carolina|Programmer III|5/27/2018|
+|SYDEL SHARVELL|46|divorced|ssharvell2@amazon.co.jp|702-187-8715|4 School Place,Las Vegas,Nevada|Budget/Accounting Analyst I|10/6/2017|
+|CONSTANTIN DE LA CRUZ|35|single|co3@bloglines.com|402-688-7162|6 Monument Crossing,Omaha,Nebraska|Desktop Support Technician|10/20/2015|
+|GAYLOR REDHOLE|38|married|gredhole4@japanpost.jp|917-394-6001|88 Cherokee Pass,New York City,New York|Legal Assistant|5/29/2019|
+
+### Check and clean "membership_date" column
+```SQL
+SELECT 
+	DISTINCT CAST(SUBSTRING(membership_date, -4, 4) AS INT) AS wrong_membership_date
+FROM 
+	club_member_info_cleaned cmic
+WHERE 
+	wrong_membership_date > 2000 
+ORDER BY 
+	wrong_membership_date;
+```
+|wrong_membership_date|
+|---------------------|
+|1912|
+|1913|
+|1914|
+|1915|
+|1916|
+|1917|
+|1919|
+|1921|
+
+#### Test Syntax before making "UPDATE"
+```SQL
+SELECT 
+	SUBSTR(membership_date, 1, LENGTH(membership_date) - 4) || '20' || SUBSTR(membership_date, LENGTH(membership_date) -1,2) AS tested_membership_date
+FROM 
+	club_member_info_cleaned cmic
+WHERE 
+	membership_date LIKE '%19__';
+```
+|tested_membership_date|
+|----------------------|
+|3/12/2021|
+|10/1/2012|
+|2/20/2016|
+|5/8/2012|
+|10/4/2019|
+|3/10/2013|
+|1/8/2012|
+|9/2/2014|
+|5/11/2016|
+|1/31/2015|
+|5/15/2015|
+|3/3/2017|
+|4/30/2015|
+|5/22/2021|
+|10/27/2015|
+|7/5/2015|
+
+```SQL
+UPDATE 
+	club_member_info_cleaned 
+SET 
+	membership_date = SUBSTR(membership_date, 1, LENGTH(membership_date) - 4) || '20' || SUBSTR(membership_date, LENGTH(membership_date) -1,2)
+WHERE 
+	membership_date LIKE '%19__';
+```
+|full_name|age|martial_status|email|phone|full_address|job_title|membership_date|
+|---------|---|--------------|-----|-----|------------|---------|---------------|
+|ADDIE LUSH|40|married|alush0@shutterfly.com|254-389-8708|3226 Eastlawn Pass,Temple,Texas|Assistant Professor|7/31/2013|
+|ROCK CRADICK|46|married|rcradick1@newsvine.com|910-566-2007|4 Harbort Avenue,Fayetteville,North Carolina|Programmer III|5/27/2018|
+|SYDEL SHARVELL|46|divorced|ssharvell2@amazon.co.jp|702-187-8715|4 School Place,Las Vegas,Nevada|Budget/Accounting Analyst I|10/6/2017|
+|CONSTANTIN DE LA CRUZ|35|single|co3@bloglines.com|402-688-7162|6 Monument Crossing,Omaha,Nebraska|Desktop Support Technician|10/20/2015|
+|GAYLOR REDHOLE|38|married|gredhole4@japanpost.jp|917-394-6001|88 Cherokee Pass,New York City,New York|Legal Assistant|5/29/2019|
+
+### Check "membership_date" column
+```SQL
+SELECT
+	email,
+	count(*)
+FROM
+	club_member_info_cleaned cmic
+GROUP BY
+	email
+HAVING
+	count(*) > 1;
+```
+|email|count(*)|
+|-----|--------|
+|ehuxterm0@marketwatch.com|3|
+|gprewettfl@mac.com|2|
+|greglar4r@answers.com|2|
+|hbradenri@freewebs.com|2|
+|mmorralleemj@wordpress.com|2|
+|nfilliskirkd5@newsvine.com|2|
+|omaccaughen1o@naver.com|2|
+|slamble81@amazon.co.uk|2|
+|tdunkersley8u@dedecms.com|2|
+
+_*Note: Because there is no identical ID to the users, it is hard to remove the duplicates_
