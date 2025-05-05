@@ -115,6 +115,7 @@ WHERE
 |222|
 
 ```SQL
+-- clean_age_column
 UPDATE 
 	club_member_info_cleaned 
 SET 
@@ -140,6 +141,7 @@ LIMIT
 |40|66|
 
 ```SQL
+-- fill_in_blank
 UPDATE 
 	club_member_info_cleaned 
 SET 
@@ -171,15 +173,15 @@ FROM
 |divored|
 
 ```SQL
+-- fill_in_blank
 UPDATE 
 	club_member_info_cleaned 
 SET 
 	martial_status = 'single' 
 WHERE 
 	martial_status = '';
-```
 
-```SQL
+-- clean_martial_status_column
 UPDATE 
 	club_member_info_cleaned 
 SET 
@@ -246,6 +248,7 @@ WHERE
 |7/5/2015|
 
 ```SQL
+-- clean_membership_date_column
 UPDATE 
 	club_member_info_cleaned 
 SET 
