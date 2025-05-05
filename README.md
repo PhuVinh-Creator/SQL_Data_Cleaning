@@ -268,7 +268,7 @@ WHERE
 ```SQL
 SELECT
 	email,
-	count(*)
+	count(*) AS duplicates
 FROM
 	club_member_info_cleaned cmic
 GROUP BY
@@ -276,8 +276,8 @@ GROUP BY
 HAVING
 	count(*) > 1;
 ```
-|email|count(*)|
-|-----|--------|
+|email|duplicates|
+|-----|----------|
 |ehuxterm0@marketwatch.com|3|
 |gprewettfl@mac.com|2|
 |greglar4r@answers.com|2|
