@@ -292,7 +292,7 @@ HAVING
 ```SQL
 DELETE FROM club_member_info_cleaned
 WHERE rowid NOT IN (
-    SELECT 
+    	SELECT 
 		MIN(rowid) as min_id
 	FROM 
 		club_member_info_cleaned cmic
