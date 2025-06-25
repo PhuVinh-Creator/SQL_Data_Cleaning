@@ -299,3 +299,29 @@ WHERE rowid NOT IN (
 	GROUP BY email
 	);
 ```
+The results:
+
+```SQL
+SELECT 
+	count(*) AS number_of_rows_updated
+FROM 
+	club_member_info_cleaned;
+```
+|number_of_rows_updated|
+|--------------|
+|2000|
+
+```SQL
+SELECT 
+	email,
+	COUNT(*) AS duplicates
+FROM 
+	club_member_info_cleaned cmic
+GROUP BY 
+	email
+HAVING 
+	COUNT(*) > 1;
+```
+|email|duplicates|
+|-----|----------|
+
