@@ -288,4 +288,14 @@ HAVING
 |slamble81@amazon.co.uk|2|
 |tdunkersley8u@dedecms.com|2|
 
-_*Note: Because there is no identical ID to the users, it is hard to remove the duplicates_
+#### Using the row ID to delete unwanted duplicate
+```SQL
+DELETE FROM club_member_info_cleaned
+WHERE rowid NOT IN (
+    SELECT 
+		MIN(rowid) as min_id
+	FROM 
+		club_member_info_cleaned cmic
+	GROUP BY email
+	);
+```
