@@ -76,6 +76,8 @@ UPDATE
 SET 
 	full_name = UPPER(full_name);
 ```
+The results:
+
 |full_name|age|martial_status|email|phone|full_address|job_title|membership_date|
 |---------|---|--------------|-----|-----|------------|---------|---------------|
 |ADDIE LUSH|40|married|alush0@shutterfly.com|254-389-8708|3226 Eastlawn Pass,Temple,Texas|Assistant Professor|7/31/2013|
@@ -149,6 +151,8 @@ SET
 WHERE 
 	age = '';
 ```
+The results:
+
 |full_name|age|martial_status|email|phone|full_address|job_title|membership_date|
 |---------|---|--------------|-----|-----|------------|---------|---------------|
 |ADDIE LUSH|40|married|alush0@shutterfly.com|254-389-8708|3226 Eastlawn Pass,Temple,Texas|Assistant Professor|7/31/2013|
@@ -189,6 +193,8 @@ SET
 WHERE 
 	martial_status = 'divored';
 ```
+The results:
+
 |full_name|age|martial_status|email|phone|full_address|job_title|membership_date|
 |---------|---|--------------|-----|-----|------------|---------|---------------|
 |ADDIE LUSH|40|married|alush0@shutterfly.com|254-389-8708|3226 Eastlawn Pass,Temple,Texas|Assistant Professor|7/31/2013|
@@ -219,7 +225,7 @@ ORDER BY
 |1919|
 |1921|
 
-#### Test Syntax before making "UPDATE"
+#### 3.4.1 Test Syntax before making "UPDATE"
 ```SQL
 SELECT 
 	SUBSTR(membership_date, 1, LENGTH(membership_date) - 4) || '20' || SUBSTR(membership_date, LENGTH(membership_date) -1,2) AS tested_membership_date
@@ -247,6 +253,7 @@ WHERE
 |10/27/2015|
 |7/5/2015|
 
+#### 3.4.2 Making "UPDATE"
 ```SQL
 -- clean_membership_date_column
 UPDATE 
@@ -256,6 +263,8 @@ SET
 WHERE 
 	membership_date LIKE '%19__';
 ```
+The results:
+
 |full_name|age|martial_status|email|phone|full_address|job_title|membership_date|
 |---------|---|--------------|-----|-----|------------|---------|---------------|
 |ADDIE LUSH|40|married|alush0@shutterfly.com|254-389-8708|3226 Eastlawn Pass,Temple,Texas|Assistant Professor|7/31/2013|
