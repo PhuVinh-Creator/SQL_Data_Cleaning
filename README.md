@@ -2,7 +2,7 @@
 
 This is an educational project on data cleaning and preparation using SQL. The original database in CSV format is located in the file club_member_info.csv. Here, we will explore the steps that need to be applied to obtain a cleansed version of the dataset.
 
-## Data Introduction
+## 1. Data Introduction
 ```SQL
 SELECT 
 	* 
@@ -25,8 +25,8 @@ The result:
 |mendie alexandrescu|46|single|malexandrescu8@state.gov|504-918-4753|34 Delladonna Terrace,New Orleans,Louisiana|Systems Administrator III|3/12/1921|
 | fey kloss|52|married|fkloss9@godaddy.com|808-177-0318|8976 Jackson Park,Honolulu,Hawaii|Chemical Engineer|11/5/2014|
 
-## Copy Table
-### Create a new table for cleaning
+## 2. Copy Table
+### 2.1 Create a new table for cleaning
 ```SQL
 CREATE TABLE club_member_info_cleaned (
 	full_name VARCHAR(50),
@@ -40,7 +40,7 @@ CREATE TABLE club_member_info_cleaned (
 );
 ```
 
-### Copy all values from original table
+### 2.2 Copy all values from original table
 ```SQL
 -- import_data_infor
 INSERT INTO 
@@ -51,7 +51,7 @@ FROM
 	club_member_info ; 
 ```
 
-### Overview number of existing rows before making "UPDATE" statement
+## 3 Overview number of existing rows before making "UPDATE" statement
 ```SQL
 SELECT 
 	count(*) AS number_of_rows
@@ -62,7 +62,7 @@ FROM
 |--------------|
 |2010|
 
-### Structure and clean "full_name" column
+### 3.1 Structure and clean "full_name" column
 ```SQL
 -- trim_full_name_column
 UPDATE 
@@ -84,7 +84,7 @@ SET
 |CONSTANTIN DE LA CRUZ|35||co3@bloglines.com|402-688-7162|6 Monument Crossing,Omaha,Nebraska|Desktop Support Technician|10/20/2015|
 |GAYLOR REDHOLE|38|married|gredhole4@japanpost.jp|917-394-6001|88 Cherokee Pass,New York City,New York|Legal Assistant|5/29/2019|
 
-### Check and clean "age" column
+### 3.2 Check and clean "age" column
 ```SQL
 SELECT 
 	age AS odd_age
@@ -157,7 +157,7 @@ WHERE
 |CONSTANTIN DE LA CRUZ|35||co3@bloglines.com|402-688-7162|6 Monument Crossing,Omaha,Nebraska|Desktop Support Technician|10/20/2015|
 |GAYLOR REDHOLE|38|married|gredhole4@japanpost.jp|917-394-6001|88 Cherokee Pass,New York City,New York|Legal Assistant|5/29/2019|
 
-### Check and clean "martial_status" column
+### 3.3 Check and clean "martial_status" column
 ```SQL
 SELECT 
 	DISTINCT martial_status 
@@ -197,7 +197,7 @@ WHERE
 |CONSTANTIN DE LA CRUZ|35|single|co3@bloglines.com|402-688-7162|6 Monument Crossing,Omaha,Nebraska|Desktop Support Technician|10/20/2015|
 |GAYLOR REDHOLE|38|married|gredhole4@japanpost.jp|917-394-6001|88 Cherokee Pass,New York City,New York|Legal Assistant|5/29/2019|
 
-### Check and clean "membership_date" column
+### 3.4 Check and clean "membership_date" column
 ```SQL
 SELECT 
 	DISTINCT CAST(SUBSTRING(membership_date, -4, 4) AS INT) AS wrong_membership_date
@@ -264,7 +264,7 @@ WHERE
 |CONSTANTIN DE LA CRUZ|35|single|co3@bloglines.com|402-688-7162|6 Monument Crossing,Omaha,Nebraska|Desktop Support Technician|10/20/2015|
 |GAYLOR REDHOLE|38|married|gredhole4@japanpost.jp|917-394-6001|88 Cherokee Pass,New York City,New York|Legal Assistant|5/29/2019|
 
-### Check "membership_date" column
+### 3.5 Check "membership_date" column
 ```SQL
 SELECT
 	email,
